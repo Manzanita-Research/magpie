@@ -22,6 +22,14 @@ The core workflow. Four skills that cover ideation, setup, daily work, and migra
 
 **linear-workflow** — Day-to-day issue tracking. When you describe work — "let's build X", "Y is broken", "we need Z" — it creates issues in the right project with appropriate labels. No forms, no ceremony.
 
+### farm-stand
+
+Building-in-public updates. Pulls what you've recently shipped from Linear, asks for the human parts (vibes, context, shoutouts), and formats a casual update you'd actually want to post. Saves to `farm-stand/` as a running archive.
+
+```
+/plugin install farm-stand@magpie
+```
+
 ### gsd-tools
 
 For repos transitioning from [GSD](https://github.com/gsd-build/get-shit-done) to Linear. Reads `.planning/` directories, identifies incomplete work, and creates corresponding Linear issues. One-time use per repo.

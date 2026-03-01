@@ -19,6 +19,12 @@
       "description": "Migration tools for transitioning from GSD (.planning/) to Linear. One-time use per repo — reads existing phases and creates Linear issues for incomplete work.",
       "source": "./plugins/gsd-tools",
       "strict": false
+    },
+    {
+      "name": "farm-stand",
+      "description": "Building-in-public updates from recent Linear activity and freeform notes. Summarize what you shipped into a casual, human post.",
+      "source": "./plugins/farm-stand",
+      "strict": false
     }
   ]
 }

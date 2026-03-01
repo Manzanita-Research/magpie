@@ -1,0 +1,82 @@
+[
+  {
+    "query": "ok it's friday afternoon, I've shipped a ton this week and I want to write up a quick post about it for linkedin. can you pull what I've done from linear and help me draft something?",
+    "should_trigger": true
+  },
+  {
+    "query": "farm-stand time! been building since 5am, let's see what we've got",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to do a building in public update - caspar just hit v1, village-radio is live, and I shipped a PR to linctl. help me write something casual about all of it",
+    "should_trigger": true
+  },
+  {
+    "query": "what have I shipped recently? I want to share an update with my community but I can't remember everything I've been working on",
+    "should_trigger": true
+  },
+  {
+    "query": "can you summarize my recent linear activity into something I could post on twitter? not a changelog, more like a 'here's what I've been making' vibe",
+    "should_trigger": true
+  },
+  {
+    "query": "I need to write a dev update for the manzanita research blog. pull my harvested issues from the last week and let's put something together",
+    "should_trigger": true
+  },
+  {
+    "query": "what's new across all my projects? I want to draft a quick update post before I forget everything I did this sprint",
+    "should_trigger": true
+  },
+  {
+    "query": "let me write up what I built this morning - I've been going hard since dawn and want to capture it while it's fresh. something I can share publicly\n\nalso, we wrote a new personal newsletter!",
+    "should_trigger": true
+  },
+  {
+    "query": "time for a status update - I want to show people what manzanita research has been up to. nothing formal, just 'here's what we grew'",
+    "should_trigger": true
+  },
+  {
+    "query": "what should I work on next? pull up my ready issues for magpie",
+    "should_trigger": false
+  },
+  {
+    "query": "the sidebar component in caspar is broken on narrow terminals, the bubbletea layout collapses. can you look into it?",
+    "should_trigger": false
+  },
+  {
+    "query": "I have an idea - what if we made a tool that auto-generates album art from spectrograms? like frequency-to-color mapping. seed this",
+    "should_trigger": false
+  },
+  {
+    "query": "generate a CHANGELOG.md for caspar v0.2.0 based on the git log since the last tag. standard keep-a-changelog format",
+    "should_trigger": false
+  },
+  {
+    "query": "write release notes for village-radio v1.0 - list all the new features, breaking changes, and migration steps",
+    "should_trigger": false
+  },
+  {
+    "query": "what's on my board right now? show me everything that's growing or ripening across all projects",
+    "should_trigger": false
+  },
+  {
+    "query": "can you review the PR I just opened on linctl? it adds support for group labels. I want to make sure the tests pass before I ping Kyle",
+    "should_trigger": false
+  },
+  {
+    "query": "we need to set up linear for the new tone-science repo. create a product label and a project for it",
+    "should_trigger": false
+  },
+  {
+    "query": "run a standup report from jira for the engineering team - pull everyone's completed tickets from yesterday and format it for the #standup slack channel",
+    "should_trigger": false
+  },
+  {
+    "query": "what did I do yesterday? I need to fill out my timesheet and I can't remember which issues I worked on",
+    "should_trigger": false
+  },
+  {
+    "query": "let's plan next week - look at what's in soil and ready, and help me prioritize what to move to growing",
+    "should_trigger": false
+  }
+]
