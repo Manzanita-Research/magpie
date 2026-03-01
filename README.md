@@ -10,11 +10,13 @@ Built for solo devs and small teams juggling multiple projects. Opinionated abou
 
 ### linear
 
-The core workflow. Three skills that cover setup, daily work, and migration:
+The core workflow. Four skills that cover ideation, setup, daily work, and migration:
 
 ```
 /plugin install linear@magpie
 ```
+
+**linear-seed** — Catch project ideas before they fly away. When you riff on a "what if we..." thought, it files a lightweight Seed issue in Linear. No repo, no plan, just a sticky note on the studio wall. Promote it to a real project when it's ready.
 
 **linear-setup** — Organize Linear for multi-repo work. One team, a "Product" label group with a label per repo, custom views for your active projects. Run once to set up, again when things drift.
 
@@ -34,6 +36,8 @@ For repos transitioning from [GSD](https://github.com/gsd-build/get-shit-done) t
 - A Linear workspace
 
 ## The workflow
+
+**Ideas:** Riff on a concept and `linear-seed` catches it as a Seed issue — lightweight, no commitment. Review your seeds when you're ready to decide what grows.
 
 **Setup:** Run `linear-setup` once to organize your workspace. It discovers your GitHub repos, creates a Product label group, and gets your board ready for multi-project work.
 
