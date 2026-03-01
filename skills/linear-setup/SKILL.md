@@ -125,7 +125,36 @@ Custom views are created in the Linear UI (not via API/CLI), so provide the filt
 2. Filter by Label → Product → [repo-name]
 3. Save and favorite
 
-## Step 7: Recap
+## Step 7: Rename workflow statuses (optional)
+
+Linear's default statuses are fine but generic. If the user wants something with more personality, offer to rename them. This requires hitting the Linear GraphQL API directly — linctl doesn't support workflow state renaming yet.
+
+The magpie-recommended statuses:
+
+| Category | Default | Recommended | Why |
+|---|---|---|---|
+| Backlog | Icebox | **Compost** | Ideas decomposing, becoming soil |
+| Backlog | Backlog | **Backlog** | Neutral enough to keep |
+| Unstarted | Todo | **Ready** | It's ready to pick up |
+| Started | In Progress | **Growing** | The work is alive |
+| Started | In Review | **In Review** | Functional, not jargon — keep it |
+| Completed | Done | **Shipped** | You made a thing and it's out |
+| Cancelled | Cancelled | **Composted** | Went back to the earth — fertilizer, not failure |
+| Cancelled | Duplicate | **Duplicate** | Descriptive, keep it |
+
+To rename, query the team's workflow states and update each:
+
+```graphql
+# Get current states
+{ team(id: "<TEAM_ID>") { states { nodes { id name type } } } }
+
+# Rename a state
+mutation { workflowStateUpdate(id: "<STATE_ID>", input: { name: "Growing" }) { success } }
+```
+
+This is a one-time setup. Ask before renaming — not everyone wants botanical workflow vibes.
+
+## Step 8: Recap
 
 Summarize what was set up:
 
@@ -134,6 +163,7 @@ Summarize what was set up:
 > - **Team:** [team name] (your single workspace)
 > - **Product labels:** [count] labels in the "Product" group
 > - **Type labels:** Bug, Feature, Improvement (unchanged)
+> - **Workflow:** Compost → Ready → Growing → In Review → Shipped (if renamed)
 > - **Next step:** When you create issues, tag them with the right product label. The `linear-workflow` skill does this automatically based on which repo you're working in.
 >
 > To add a new product label later:

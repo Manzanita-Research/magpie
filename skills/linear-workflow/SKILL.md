@@ -88,15 +88,15 @@ linctl label create --team <TEAM_KEY> --name "Infrastructure" --color "#8B5CF6"
 
 ## Working on existing issues
 
-When starting work on something that already has a ticket, move it to "In Progress":
+When starting work on something that already has a ticket, move it to "Growing":
 
 ```bash
-linctl issue update <ISSUE_ID> --state "In Progress" --assignee me
+linctl issue update <ISSUE_ID> --state "Growing" --assignee me
 ```
 
 When done:
 ```bash
-linctl issue update <ISSUE_ID> --state "Done"
+linctl issue update <ISSUE_ID> --state "Shipped"
 ```
 
 Attach PRs when relevant:
@@ -110,7 +110,7 @@ When the user asks what's open, in progress, or needs doing:
 
 ```bash
 # What's in flight
-linctl issue list --team <TEAM_KEY> --state "In Progress" --json
+linctl issue list --team <TEAM_KEY> --state "Growing" --json
 
 # What's ready to pick up (for this project)
 linctl issue list --team <TEAM_KEY> --project "My Project" --json

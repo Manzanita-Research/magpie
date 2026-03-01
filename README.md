@@ -45,6 +45,21 @@ For repos transitioning from [GSD](https://github.com/gsd-build/get-shit-done) t
 
 **Migration:** If you're coming from GSD, the `gsd-to-linear` skill reads your `.planning/` directory, skips completed phases, and migrates only the remaining work into Linear issues.
 
+## Workflow statuses
+
+Magpie renames Linear's default statuses to something with more life:
+
+| Default | Magpie | What it means |
+|---|---|---|
+| Icebox | **Compost** | Cold storage — ideas decomposing into soil |
+| Todo | **Ready** | Ready to pick up |
+| In Progress | **Growing** | Actively tending this |
+| In Review | **In Review** | Unchanged — it's fine |
+| Done | **Shipped** | It's out in the world |
+| Cancelled | **Composted** | Went back to the earth |
+
+This is optional — `linear-setup` offers it during workspace configuration.
+
 ## Philosophy
 
 One team. Product labels, not team-per-repo. Custom views for focus. Projects for actual features, not products. Start simple, promote to teams when something outgrows it.
