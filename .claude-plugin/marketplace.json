@@ -4,7 +4,7 @@
     "name": "Manzanita Research",
   },
   "metadata": {
-    "description": "Project management skills for people with too many ideas. Catches your scattered thoughts and files them in Linear.",
+    "description": "Opinionated agentic project management built on Linear. For solo devs and small teams with too many repos.",
     "version": "1.0.0"
   },
   "plugins": [
