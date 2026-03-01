@@ -96,7 +96,7 @@ linctl issue update <ISSUE_ID> --state "Growing" --assignee me
 
 When done:
 ```bash
-linctl issue update <ISSUE_ID> --state "Shipped"
+linctl issue update <ISSUE_ID> --state "Harvested"
 ```
 
 Attach PRs when relevant:

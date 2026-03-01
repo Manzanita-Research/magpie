@@ -51,11 +51,12 @@ Magpie renames Linear's default statuses to something with more life:
 
 | Default | Magpie | What it means |
 |---|---|---|
-| Icebox | **Compost** | Cold storage — ideas decomposing into soil |
+| Icebox | **Seeds** | Raw ideas — dormant, waiting to germinate |
+| Backlog | **Soil** | Real work, planted, waiting for its season |
 | Todo | **Ready** | Ready to pick up |
 | In Progress | **Growing** | Actively tending this |
-| In Review | **In Review** | Unchanged — it's fine |
-| Done | **Shipped** | It's out in the world |
+| In Review | **Ripening** | Fruit's on the vine, seeing if it's ready |
+| Done | **Harvested** | You grew it, you picked it, it's done |
 | Cancelled | **Composted** | Went back to the earth |
 
 This is optional — `linear-setup` offers it during workspace configuration.

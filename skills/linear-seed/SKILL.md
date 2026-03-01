@@ -13,7 +13,7 @@ When someone riffs on an idea — "what if we made a Spotify automation tool for
 
 A Seed is a Linear issue with the **Seed** label. That's it. No Product label (it doesn't have a repo yet), no project, no priority. Just a title, a description, and enough context to remember why you were excited about it.
 
-Seeds start in **Compost** (the backlog cold storage) until one of three things happens:
+Seeds start in **Seeds** (raw ideas, waiting to germinate) until one of three things happens:
 1. **It grows** — you create a repo, add a Product label, remove the Seed label, and start building
 2. **It merges** — the idea gets folded into an existing project as a feature
 3. **It composts** — you move it to Composted. Not a failure — fertilizer. Most seeds don't sprout.
@@ -34,7 +34,7 @@ linctl issue create \
   --title "spotify automation tool for irl music communities" \
   --team <TEAM_KEY> \
   --labels "Seed" \
-  --state "Compost" \
+  --state "Seeds" \
   --description "Release Radar but for your people. Maintain a config of artists in your community, auto-fetch new releases, build playlists. No algorithmic curation — just what your scene is making."
 ```
 
@@ -90,7 +90,7 @@ linctl issue list --team <TEAM_KEY> --labels "Seed" --newer-than all_time --json
 Present them as a simple list — title and creation date. Offer to:
 - **Promote** one to a real project (create repo, add Product label, remove Seed)
 - **Enrich** one with more context (add a comment)
-- **Compost** ones that aren't going anywhere (move to Composted)
+- **Compost** ones that aren't going anywhere (move to Composted state)
 
 ## Promoting a seed
 

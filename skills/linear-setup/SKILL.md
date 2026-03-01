@@ -133,12 +133,12 @@ The magpie-recommended statuses:
 
 | Category | Default | Recommended | Why |
 |---|---|---|---|
-| Backlog | Icebox | **Compost** | Ideas decomposing, becoming soil |
-| Backlog | Backlog | **Backlog** | Neutral enough to keep |
+| Backlog | Icebox | **Seeds** | Raw ideas — dormant, waiting to germinate |
+| Backlog | Backlog | **Soil** | Real work, planted, waiting for its season |
 | Unstarted | Todo | **Ready** | It's ready to pick up |
 | Started | In Progress | **Growing** | The work is alive |
-| Started | In Review | **In Review** | Functional, not jargon — keep it |
-| Completed | Done | **Shipped** | You made a thing and it's out |
+| Started | In Review | **Ripening** | Fruit's on the vine, seeing if it's ready |
+| Completed | Done | **Harvested** | You grew it, you picked it, it's done |
 | Cancelled | Cancelled | **Composted** | Went back to the earth — fertilizer, not failure |
 | Cancelled | Duplicate | **Duplicate** | Descriptive, keep it |
 
@@ -163,7 +163,7 @@ Summarize what was set up:
 > - **Team:** [team name] (your single workspace)
 > - **Product labels:** [count] labels in the "Product" group
 > - **Type labels:** Bug, Feature, Improvement (unchanged)
-> - **Workflow:** Compost → Ready → Growing → In Review → Shipped (if renamed)
+> - **Workflow:** Seeds → Soil → Ready → Growing → Ripening → Harvested (if renamed)
 > - **Next step:** When you create issues, tag them with the right product label. The `linear-workflow` skill does this automatically based on which repo you're working in.
 >
 > To add a new product label later:
