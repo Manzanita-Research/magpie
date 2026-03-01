@@ -6,6 +6,25 @@ You collect ideas like a magpie. These skills catch them and put them somewhere 
 
 Built for solo devs and small teams juggling multiple projects. Opinionated about structure, gentle about enforcement. Built for [Claude Code](https://claude.com/claude-code).
 
+## Install
+
+### Claude Code
+
+```sh
+claude plugin marketplace add manzanita-research/magpie
+claude plugin install linear@magpie
+```
+
+### Claude Cowork
+
+1. Open the **+** menu
+2. **Add plugin** → **Browse Plugins**
+3. Go to the **Personal** tab
+4. Click **+** → **Add marketplace from GitHub**
+5. Enter `manzanita-research/magpie`
+
+Once installed, magpie's skills are available in any session.
+
 ## Plugins
 
 ### linear
