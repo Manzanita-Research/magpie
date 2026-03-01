@@ -1,0 +1,82 @@
+[
+  {
+    "query": "what's ready? i just finished MZR-85 and want to pick up the next thing",
+    "should_trigger": true
+  },
+  {
+    "query": "what should i work on next",
+    "should_trigger": true
+  },
+  {
+    "query": "show me what's on the board for magpie",
+    "should_trigger": true
+  },
+  {
+    "query": "any tickets i can pick up? i've got a couple hours before lunch",
+    "should_trigger": true
+  },
+  {
+    "query": "ok keep going with whatever's Ready",
+    "should_trigger": true
+  },
+  {
+    "query": "do what's next",
+    "should_trigger": true
+  },
+  {
+    "query": "what needs doing",
+    "should_trigger": true
+  },
+  {
+    "query": "what's in flight right now? anything stuck?",
+    "should_trigger": true
+  },
+  {
+    "query": "pull up my issues",
+    "should_trigger": true
+  },
+  {
+    "query": "the audio routing is completely broken on m1 macs — it routes to the default output even when you've selected a specific device in preferences",
+    "should_trigger": true
+  },
+  {
+    "query": "we should add a way to export stems as FLAC, not just WAV. disk space is killing me",
+    "should_trigger": true
+  },
+  {
+    "query": "create an issue for the memory leak in the websocket handler. it's been getting worse since we added the real-time preview",
+    "should_trigger": true
+  },
+  {
+    "query": "what does this function do? i'm looking at processAudioBuffer in src/engine/buffer.ts and i can't figure out why it's allocating twice",
+    "should_trigger": false
+  },
+  {
+    "query": "explain how the routing table works in this codebase",
+    "should_trigger": false
+  },
+  {
+    "query": "can you refactor this to use async/await instead of callbacks",
+    "should_trigger": false
+  },
+  {
+    "query": "run the test suite and tell me what's failing",
+    "should_trigger": false
+  },
+  {
+    "query": "i'm thinking about maybe doing a podcast... not sure yet, just noodling. what platforms are good for hosting?",
+    "should_trigger": false
+  },
+  {
+    "query": "read CLAUDE.md and tell me what conventions this project uses",
+    "should_trigger": false
+  },
+  {
+    "query": "help me write a commit message for these changes",
+    "should_trigger": false
+  },
+  {
+    "query": "how do i set up linear? i haven't configured it yet for this workspace",
+    "should_trigger": false
+  }
+]

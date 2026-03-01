@@ -1,6 +1,6 @@
 ---
 name: linear-workflow
-description: Track work in Linear via linctl without leaving your editor. Use this skill whenever the user describes work to be done — feature requests, bugs, improvements, things to build, things to fix. Also use it when the user explicitly asks to create an issue, check what's open, or work on a ticket. Triggers on intent like "let's build X", "we need to fix Y", "add support for Z", "X is broken", "it would be nice if", as well as explicit "create an issue" or "what's on the board". If this skill is loaded in your context, use Linear for task tracking.
+description: Track work in Linear via linctl without leaving your editor. Use this skill whenever the user describes work to be done — feature requests, bugs, improvements, things to build, things to fix. Also use it when the user explicitly asks to create an issue, check what's open, or work on a ticket. Triggers on intent like "let's build X", "we need to fix Y", "add support for Z", "X is broken", "it would be nice if", "what's ready", "what should I work on next", "what's on the board", as well as explicit "create an issue". If this skill is loaded in your context, use Linear for task tracking.
 ---
 
 # Linear Workflow
@@ -104,22 +104,48 @@ Attach PRs when relevant:
 linctl issue attach <ISSUE_ID> --pr https://github.com/org/repo/pull/123
 ```
 
+## What's ready?
+
+When the user asks "what should I work on next", "what's ready", or "what's on the board" — pull Ready issues for the current repo and present them by priority.
+
+```bash
+# Fetch all Ready issues for the team
+linctl issue list --team <TEAM_KEY> --state "Ready" --json
+```
+
+Filter the results to issues with a product label matching the current repo's folder name (e.g., in the `magpie` repo, filter to issues labeled `magpie`). Then sort by priority — 1 (Urgent) first, 4 (Low) last, 0 (None) at the end.
+
+Present them as a short list:
+
+> **Ready to pick up (magpie):**
+>
+> 1. `MZR-87` update linear-setup to use linctl for status renaming *(Normal)*
+> 2. `MZR-88` add status descriptions to linear-setup workflow *(Normal)*
+> 3. `MZR-89` decide on .claude/ and linear-seed-workspace/ in repo *(Normal)*
+>
+> Want to start one? I'll move it to Growing and assign it to you.
+
+If there are no Ready issues for this repo, say so. If there are Ready issues without a product label, mention them separately — they might be cross-cutting work.
+
+When the user picks one, move it to Growing and assign:
+
+```bash
+linctl issue update <ISSUE_ID> --state "Growing" --assignee me
+```
+
 ## Checking the board
 
-When the user asks what's open, in progress, or needs doing:
+For a broader view beyond just Ready issues:
 
 ```bash
 # What's in flight
 linctl issue list --team <TEAM_KEY> --state "Growing" --json
 
-# What's ready to pick up (for this project)
-linctl issue list --team <TEAM_KEY> --project "My Project" --json
-
 # Everything assigned to me
 linctl issue list --assignee me --newer-than all_time --json
 ```
 
-Present results grouped by state. Include Linear links when available. Offer to help pick the next thing to work on.
+Present results grouped by state. Include Linear links when available.
 
 ## Issue titles
 
