@@ -127,30 +127,40 @@ Custom views are created in the Linear UI (not via API/CLI), so provide the filt
 
 ## Step 7: Rename workflow statuses (optional)
 
-Linear's default statuses are fine but generic. If the user wants something with more personality, offer to rename them. This requires hitting the Linear GraphQL API directly — linctl doesn't support workflow state renaming yet.
+Linear's default statuses are fine but generic. If the user wants something with more personality, offer to rename them.
 
 The magpie-recommended statuses:
 
-| Category | Default | Recommended | Why |
+| Category | Default | Recommended | Description |
 |---|---|---|---|
 | Backlog | Icebox | **Seeds** | Raw ideas — dormant, waiting to germinate |
 | Backlog | Backlog | **Soil** | Real work, planted, waiting for its season |
-| Unstarted | Todo | **Ready** | It's ready to pick up |
+| Unstarted | Todo | **Ready** | Ready to pick up |
 | Started | In Progress | **Growing** | The work is alive |
 | Started | In Review | **Ripening** | Fruit's on the vine, seeing if it's ready |
 | Completed | Done | **Harvested** | You grew it, you picked it, it's done |
 | Cancelled | Cancelled | **Composted** | Went back to the earth — fertilizer, not failure |
 | Cancelled | Duplicate | **Duplicate** | Descriptive, keep it |
 
-To rename, query the team's workflow states and update each:
+First, list the current workflow states to get their IDs:
 
-```graphql
-# Get current states
-{ team(id: "<TEAM_ID>") { states { nodes { id name type } } } }
-
-# Rename a state
-mutation { workflowStateUpdate(id: "<STATE_ID>", input: { name: "Growing" }) { success } }
+```bash
+linctl team statuses <TEAM_KEY> --json
 ```
+
+Then rename each state with its description:
+
+```bash
+linctl team status-update <STATE_ID> --name "Seeds" --description "Raw ideas — dormant, waiting to germinate"
+linctl team status-update <STATE_ID> --name "Soil" --description "Real work, planted, waiting for its season"
+linctl team status-update <STATE_ID> --name "Ready" --description "Ready to pick up"
+linctl team status-update <STATE_ID> --name "Growing" --description "The work is alive"
+linctl team status-update <STATE_ID> --name "Ripening" --description "Fruit's on the vine, seeing if it's ready"
+linctl team status-update <STATE_ID> --name "Harvested" --description "You grew it, you picked it, it's done"
+linctl team status-update <STATE_ID> --name "Composted" --description "Went back to the earth — fertilizer, not failure"
+```
+
+Leave "Duplicate" as-is — it's already descriptive.
 
 This is a one-time setup. Ask before renaming — not everyone wants botanical workflow vibes.
 
