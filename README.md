@@ -1,20 +1,24 @@
 # magpie
 
-Project management skills for people with too many ideas.
+Linear + Claude Code workflows for people with too many repos.
 
 You collect ideas like a magpie. These skills catch them and put them somewhere real — specifically, [Linear](https://linear.app), via [linctl](https://github.com/dorkitude/linctl).
 
-Built for [Claude Code](https://claude.com/claude-code).
+Built for solo devs and small teams juggling multiple projects. Opinionated about structure, gentle about enforcement. Built for [Claude Code](https://claude.com/claude-code).
 
 ## Plugins
 
 ### linear
 
-Day-to-day Linear integration. When you describe work — "let's build X", "Y is broken", "we need Z" — it creates issues in the right project with appropriate labels. No forms, no ceremony.
+The core workflow. Three skills that cover setup, daily work, and migration:
 
 ```
 /plugin install linear@magpie
 ```
+
+**linear-setup** — Organize Linear for multi-repo work. One team, a "Product" label group with a label per repo, custom views for your active projects. Run once to set up, again when things drift.
+
+**linear-workflow** — Day-to-day issue tracking. When you describe work — "let's build X", "Y is broken", "we need Z" — it creates issues in the right project with appropriate labels. No forms, no ceremony.
 
 ### gsd-tools
 
@@ -29,10 +33,16 @@ For repos transitioning from [GSD](https://github.com/gsd-build/get-shit-done) t
 - [linctl](https://github.com/dorkitude/linctl) installed and authenticated (`linctl auth`)
 - A Linear workspace
 
-## How it works
+## The workflow
 
-The `linear` plugin catches conversational intent. You don't have to say "create an issue." When you say things like "the sidebar is broken" or "let's add dark mode," it drafts an issue, picks labels from your team's set, and confirms before creating.
+**Setup:** Run `linear-setup` once to organize your workspace. It discovers your GitHub repos, creates a Product label group, and gets your board ready for multi-project work.
 
-Projects map to repos by folder name: `my-cool-project` → "My Cool Project". If no project exists yet, it asks before creating one.
+**Daily:** The `linear-workflow` skill catches conversational intent. You don't have to say "create an issue." When you say things like "the sidebar is broken" or "let's add dark mode," it drafts an issue, picks labels from your team's set, and confirms before creating. Projects map to repos by folder name.
 
-The `gsd-tools` plugin reads your existing `.planning/` directory, skips completed phases, and migrates only the remaining work into Linear issues. After migration, it offers to archive `.planning/` and hands off to the `linear` plugin for future work.
+**Migration:** If you're coming from GSD, the `gsd-to-linear` skill reads your `.planning/` directory, skips completed phases, and migrates only the remaining work into Linear issues.
+
+## Philosophy
+
+One team. Product labels, not team-per-repo. Custom views for focus. Projects for actual features, not products. Start simple, promote to teams when something outgrows it.
+
+This isn't the only way to use Linear. It's the way that works when you're one person with many things.

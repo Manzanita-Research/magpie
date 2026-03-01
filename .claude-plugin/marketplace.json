@@ -14,7 +14,8 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/linear-workflow"
+        "./skills/linear-workflow",
+        "./skills/linear-setup"
       ]
     },
     {
