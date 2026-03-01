@@ -1,7 +1,7 @@
 {
   "name": "magpie",
   "owner": {
-    "name": "Manzanita Research",
+    "name": "Manzanita Research"
   },
   "metadata": {
     "description": "Opinionated agentic project management built on Linear. For solo devs and small teams with too many repos.",
@@ -11,22 +11,14 @@
     {
       "name": "linear",
       "description": "Linear issue tracking workflow via linctl. Catches intent from conversation and files issues — no forms, no ceremony. Works with any Linear workspace.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/linear-workflow",
-        "./skills/linear-setup",
-        "./skills/linear-seed"
-      ]
+      "source": "./plugins/linear",
+      "strict": false
     },
     {
       "name": "gsd-tools",
       "description": "Migration tools for transitioning from GSD (.planning/) to Linear. One-time use per repo — reads existing phases and creates Linear issues for incomplete work.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/gsd-to-linear"
-      ]
+      "source": "./plugins/gsd-tools",
+      "strict": false
     }
   ]
 }
