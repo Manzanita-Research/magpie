@@ -29,15 +29,6 @@ When the user floats an idea, draft a seed from context. Don't interrogate them 
 
 **Description:** A short paragraph capturing the core of the idea. What is it, who is it for, why does it matter. If the user riffed for a while, distill it — don't transcribe.
 
-```bash
-linctl issue create \
-  --title "spotify automation tool for irl music communities" \
-  --team <TEAM_KEY> \
-  --labels "Seed" \
-  --state "Seeds" \
-  --description "Release Radar but for your people. Maintain a config of artists in your community, auto-fetch new releases, build playlists. No algorithmic curation — just what your scene is making."
-```
-
 **Don't set:**
 - Priority (it's not urgent, it's an idea)
 - Project (it doesn't belong to one yet)
@@ -56,18 +47,31 @@ Always show the user what you're about to file:
 
 Keep it fast. One confirmation, not a form.
 
+## Execution
+
+After the user confirms, delegate the Linear work to a background subagent. This keeps the main context clean — seeding an idea shouldn't eat 10 tool calls in your conversation.
+
+1. Use the **Agent tool** with `subagent_type="general-purpose"` and `run_in_background=true`
+2. Include in the prompt:
+   - The full text of `plugins/linear/LINCTL_REFERENCE.md` (read it first if not already in context)
+   - The seed title and description
+   - Team key if already known from session context
+   - If the user riffed longer, include the comment body to add after creation
+3. The subagent should:
+   - Run `linctl whoami` to verify auth
+   - Run `linctl team list --json` to get the team key (if not provided)
+   - Create the issue with `linctl issue create --title "..." --team <KEY> --labels "Seed" --state "Seeds" --description "..."`
+   - If there's a longer riff, add it as a comment with `linctl comment create <ID> --body "..."`
+4. Report back to the user with the issue identifier and a confirmation
+
+See `plugins/linear/LINCTL_REFERENCE.md` for exact command syntax and gotchas.
+
 ## When the user riffs longer
 
 Sometimes an idea comes with context — "and it could work like X, and we'd need Y, and the hard part is Z." When the conversation has more substance than fits in a description:
 
 1. File the seed with a concise description (the elevator pitch)
-2. Add a comment with the longer riff — the context, the technical ideas, the open questions
-
-```bash
-# After creating the issue
-linctl comment create <ISSUE_ID> \
-  --body "From the original riff: ..."
-```
+2. Have the subagent add a comment with the longer riff — the context, the technical ideas, the open questions
 
 This way the seed stays scannable in list view but the full context is preserved.
 
@@ -84,7 +88,7 @@ If you're unsure: "Want me to seed this idea in Linear?"
 When the user asks what's on the wall, what ideas they've had, or wants to review seeds:
 
 ```bash
-linctl issue list --team <TEAM_KEY> --labels "Seed" --newer-than all_time --json
+linctl issue list --team <TEAM_KEY> --state "Seeds" --json
 ```
 
 Present them as a simple list — title and creation date. Offer to:

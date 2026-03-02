@@ -7,6 +7,10 @@ description: Migrate a repo's GSD (.planning/) data to Linear issues. Use this s
 
 This skill reads a repo's `.planning/` directory and creates corresponding Linear issues for any incomplete work. It's a one-time migration — run it once per repo, then use the `linear-workflow` skill going forward.
 
+## Command reference
+
+All linctl commands used by this skill are documented in `plugins/linear/LINCTL_REFERENCE.md`. Read it before running any linctl commands — it has exact flags and gotchas that prevent wasted calls.
+
 ## Before you start
 
 1. Confirm linctl is authenticated: `linctl whoami`

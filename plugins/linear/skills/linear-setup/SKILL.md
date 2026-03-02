@@ -34,7 +34,7 @@ The fix: use **one team** as your workspace, a **"Product" label group** to tag 
 ```bash
 linctl whoami
 linctl team list --json
-linctl label list --json
+linctl label list --team <TEAM_KEY> --json
 ```
 
 Understand what's already there. If there's already one team — great, use it. If there are multiple teams, ask whether they want to consolidate or keep the structure.
@@ -145,20 +145,22 @@ The magpie-recommended statuses:
 First, list the current workflow states to get their IDs:
 
 ```bash
-linctl team statuses <TEAM_KEY> --json
+linctl team state list <TEAM_KEY> --json
 ```
 
 Then rename each state with its description:
 
 ```bash
-linctl team status-update <STATE_ID> --name "Seeds" --description "Raw ideas — dormant, waiting to germinate"
-linctl team status-update <STATE_ID> --name "Soil" --description "Real work, planted, waiting for its season"
-linctl team status-update <STATE_ID> --name "Ready" --description "Ready to pick up"
-linctl team status-update <STATE_ID> --name "Growing" --description "The work is alive"
-linctl team status-update <STATE_ID> --name "Ripening" --description "Fruit's on the vine, seeing if it's ready"
-linctl team status-update <STATE_ID> --name "Harvested" --description "You grew it, you picked it, it's done"
-linctl team status-update <STATE_ID> --name "Composted" --description "Went back to the earth — fertilizer, not failure"
+linctl team state update <STATE_ID> --name "Seeds" --description "Raw ideas — dormant, waiting to germinate"
+linctl team state update <STATE_ID> --name "Soil" --description "Real work, planted, waiting for its season"
+linctl team state update <STATE_ID> --name "Ready" --description "Ready to pick up"
+linctl team state update <STATE_ID> --name "Growing" --description "The work is alive"
+linctl team state update <STATE_ID> --name "Ripening" --description "Fruit's on the vine, seeing if it's ready"
+linctl team state update <STATE_ID> --name "Harvested" --description "You grew it, you picked it, it's done"
+linctl team state update <STATE_ID> --name "Composted" --description "Went back to the earth — fertilizer, not failure"
 ```
+
+See `plugins/linear/LINCTL_REFERENCE.md` for exact command syntax and gotchas.
 
 Leave "Duplicate" as-is — it's already descriptive.
 

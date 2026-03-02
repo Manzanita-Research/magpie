@@ -9,25 +9,20 @@ You collect ideas like a magpie. This skill catches them and puts them somewhere
 
 When the user describes work — building something, fixing something, wanting something — create a Linear issue for it. No forms, no ceremony. Draft it from context, confirm, file it.
 
-## First things first
+## Command reference
 
-At the start of a session, discover the workspace:
+All linctl commands used by this skill are documented in `plugins/linear/LINCTL_REFERENCE.md`. Read it before running any linctl commands — it has exact flags and gotchas that prevent wasted calls.
 
-```bash
-# Who am I?
-linctl whoami
+## First things first — discover the workspace via subagent
 
-# What teams do I have access to?
-linctl team list --json
+At session start, delegate workspace discovery to a background subagent. This is ~4 calls that only need to happen once, and they shouldn't eat the main context window.
 
-# What projects exist?
-linctl project list --team <TEAM_KEY> --newer-than all_time --json
-
-# What labels are available?
-linctl label list --team <TEAM_KEY> --json
-```
-
-Cache the team key and available labels for the session. If there's only one team, use it automatically. If there are multiple, ask the user which one to use for this repo.
+1. Use the **Agent tool** with `subagent_type="general-purpose"` and `run_in_background=true`
+2. Include in the prompt:
+   - The full text of `plugins/linear/LINCTL_REFERENCE.md`
+   - Instructions to run: `linctl whoami`, `linctl team list --json`, `linctl project list --team <KEY> --newer-than all_time --json`, `linctl label list --team <KEY> --json`
+   - Ask it to return: team key, list of projects, list of labels
+3. Cache the results for the session. If there's only one team, use it automatically. If there are multiple, ask the user which one to use for this repo.
 
 ## How projects map to repos
 
@@ -60,15 +55,14 @@ This includes:
 
 Before creating, briefly confirm what you're about to file: the title, labels, and (if not obvious) a one-line description. Don't make the user fill out a form — draft it from context and let them correct.
 
-```bash
-linctl issue create \
-  --title "add dark mode support" \
-  --team <TEAM_KEY> \
-  --project "My Project" \
-  --labels "Feature" \
-  --assign-me \
-  --description "Support system-preference-aware dark/light theme switching."
-```
+After confirmation, delegate the creation to a background subagent:
+
+1. Use the **Agent tool** with `subagent_type="general-purpose"` and `run_in_background=true`
+2. Include in the prompt:
+   - The full text of `plugins/linear/LINCTL_REFERENCE.md`
+   - The issue details (title, team key, project, labels, description, --assign-me if appropriate)
+   - If the project doesn't exist yet, instruct the subagent to create it first with `linctl project create`
+3. Report back with the issue identifier
 
 ## Labels
 
@@ -106,12 +100,14 @@ linctl issue attach <ISSUE_ID> --pr https://github.com/org/repo/pull/123
 
 ## What's ready?
 
-When the user asks "what should I work on next", "what's ready", or "what's on the board" — pull Ready issues for the current repo and present them by priority.
+When the user asks "what should I work on next", "what's ready", or "what's on the board" — delegate the query to a background subagent, then present results by priority.
 
-```bash
-# Fetch all Ready issues for the team
-linctl issue list --team <TEAM_KEY> --state "Ready" --json
-```
+1. Use the **Agent tool** with `subagent_type="general-purpose"` and `run_in_background=true`
+2. Include in the prompt:
+   - The full text of `plugins/linear/LINCTL_REFERENCE.md`
+   - Instructions to run `linctl issue list --team <TEAM_KEY> --state "Ready" --json`
+   - The current repo's folder name (for filtering by product label)
+   - Ask it to return the filtered, priority-sorted results
 
 Filter the results to issues with a product label matching the current repo's folder name (e.g., in the `magpie` repo, filter to issues labeled `magpie`). Then sort by priority — 1 (Urgent) first, 4 (Low) last, 0 (None) at the end.
 
@@ -135,15 +131,13 @@ linctl issue update <ISSUE_ID> --state "Growing" --assignee me
 
 ## Checking the board
 
-For a broader view beyond just Ready issues:
+For a broader view beyond just Ready issues, delegate to a background subagent:
 
-```bash
-# What's in flight
-linctl issue list --team <TEAM_KEY> --state "Growing" --json
-
-# Everything assigned to me
-linctl issue list --assignee me --newer-than all_time --json
-```
+1. Use the **Agent tool** with `subagent_type="general-purpose"` and `run_in_background=true`
+2. Include in the prompt:
+   - The full text of `plugins/linear/LINCTL_REFERENCE.md`
+   - Instructions to run `linctl issue list --team <TEAM_KEY> --state "Growing" --json` and `linctl issue list --assignee me --newer-than all_time --json`
+   - Ask it to return results grouped by state
 
 Present results grouped by state. Include Linear links when available.
 

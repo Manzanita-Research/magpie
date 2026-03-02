@@ -26,24 +26,24 @@ If a previous post exists, read it to find the date. The window is "since that l
 
 Default to "since yesterday" if there's no prior post and no guidance.
 
-### Step 2: Pull recent activity from Linear
+### Step 2: Pull recent activity from Linear via subagent
 
-Fetch recently completed work across all products:
+Delegate the Linear data-fetching to a background subagent. This is multiple calls that don't need to be in the main context.
 
-```bash
-# Get the team key
-linctl team list --json
-
-# Harvested issues (shipped work)
-linctl issue list --team <TEAM_KEY> --state "Harvested" --newer-than week --json
-
-# Also check for recently created projects (new repos/initiatives)
-linctl project list --team <TEAM_KEY> --newer-than week --json
-```
+1. Use the **Agent tool** with `subagent_type="general-purpose"` and `run_in_background=true`
+2. Include in the prompt:
+   - The full text of `plugins/linear/LINCTL_REFERENCE.md` (read it first)
+   - The time window from Step 1
+   - Instructions to run:
+     - `linctl team list --json` (to get team key)
+     - `linctl issue list --team <KEY> --state "Harvested" --newer-than week --json`
+     - `linctl issue list --team <KEY> --state "Ripening" --newer-than week --json`
+     - `linctl project list --team <KEY> --newer-than week --json`
+   - Ask it to return results grouped by product label
 
 Filter results to the time window from Step 1. Group by product label — each product label roughly maps to a project/repo.
 
-Also check for issues that moved to "Ripening" (in review / nearly done) — these are worth a "coming soon" mention if the user wants.
+Issues in "Ripening" (in review / nearly done) are worth a "coming soon" mention if the user wants.
 
 ### Step 3: Ask for the yapping
 
