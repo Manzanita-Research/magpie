@@ -27,8 +27,9 @@ linctl team state update <STATE_ID> --name "Seeds" --description "Raw ideas — 
 # List labels (--team is REQUIRED — will error without it)
 linctl label list --team <TEAM_KEY> --json
 
-# Create a label in a group
-linctl label create --team <TEAM_KEY> --name "my-project" --group "Product" --color "#F9A8D4"
+# Create a label group, then add children
+linctl label create --team <TEAM_KEY> --name "Product" --is-group
+linctl label create --team <TEAM_KEY> --name "my-project" --parent "Product" --color "#F9A8D4"
 ```
 
 ## Issues
@@ -84,3 +85,5 @@ linctl project create --name "My Project" --team <TEAM_KEY> --state started
 - **No `workflow list` or `team statuses` command** — use `team state list`
 - **No `team status-update` command** — use `team state update`
 - **`--project` on `issue create` won't auto-create** — project must exist first
+- **`--labels` on `issue update` REPLACES all labels** — it does not append. To keep existing labels, include them in the comma-separated list
+- **No `team state create`** — new workflow states must be created in the Linear UI. `linctl` can only `list` and `update` existing states

@@ -78,9 +78,17 @@ Wait for confirmation before creating anything.
 Linear's label groups make labels mutually exclusive within the group — exactly right for "which product is this issue about."
 
 ```bash
-# Create each product label as a child of the group
-# linctl creates parent groups implicitly when you use --group
-linctl label create --team <TEAM_KEY> --name "<repo-name>" --group "Product" --color "<color>"
+# First create the Product group
+linctl label create --team <TEAM_KEY> --name "Product" --is-group
+
+# Then create each product label as a child
+linctl label create --team <TEAM_KEY> --name "<repo-name>" --parent "Product" --color "<color>"
+```
+
+Also create the **Seed** label — the `linear-seed` skill uses it to tag raw ideas:
+
+```bash
+linctl label create --team <TEAM_KEY> --name "Seed" --color "#86EFAC"
 ```
 
 **Color assignment:** Use soft pastels with maximum hue separation so products are instantly distinguishable on a board:
@@ -131,16 +139,27 @@ Linear's default statuses are fine but generic. If the user wants something with
 
 The magpie-recommended statuses:
 
-| Category | Default | Recommended | Description |
-|---|---|---|---|
-| Backlog | Icebox | **Seeds** | Raw ideas — dormant, waiting to germinate |
-| Backlog | Backlog | **Soil** | Real work, planted, waiting for its season |
-| Unstarted | Todo | **Ready** | Ready to pick up |
-| Started | In Progress | **Growing** | The work is alive |
-| Started | In Review | **Ripening** | Fruit's on the vine, seeing if it's ready |
-| Completed | Done | **Harvested** | You grew it, you picked it, it's done |
-| Cancelled | Cancelled | **Composted** | Went back to the earth — fertilizer, not failure |
-| Cancelled | Duplicate | **Duplicate** | Descriptive, keep it |
+| Category | Default | Recommended | Color | Description |
+|---|---|---|---|---|
+| Backlog | *(create in UI)* | **Seeds** | `#8B5CF6` (violet) | Raw ideas — dormant, waiting to germinate |
+| Backlog | Backlog | **Soil** | `#A78BFA` (soft violet) | Real work, planted, waiting for its season |
+| Unstarted | Todo | **Ready** | `#60A5FA` (sky) | Ready to pick up |
+| Started | In Progress | **Growing** | `#34D399` (emerald) | The work is alive |
+| Started | In Review | **Ripening** | `#FBBF24` (amber) | Fruit's on the vine, seeing if it's ready |
+| Completed | Done | **Harvested** | `#F97316` (orange) | You grew it, you picked it, it's done |
+| Cancelled | Cancelled | **Composted** | `#78716C` (stone) | Went back to the earth — fertilizer, not failure |
+| Cancelled | Duplicate | **Duplicate** | — | Keep as-is |
+
+**Important:** A default Linear team only has ONE backlog state (Backlog). The Seeds state must be created manually in the Linear UI first — `linctl` can only rename existing states, not create new ones.
+
+Walk the user through this before running the rename commands:
+
+> Before I rename states, you'll need to create one new state in the Linear UI:
+>
+> 1. Go to **Team Settings → Workflow**
+> 2. In the **Backlog** section, click **+ Add status**
+> 3. Name it anything (we'll rename it via CLI)
+> 4. Let me know when it's there
 
 First, list the current workflow states to get their IDs:
 
@@ -148,16 +167,16 @@ First, list the current workflow states to get their IDs:
 linctl team state list <TEAM_KEY> --json
 ```
 
-Then rename each state with its description:
+Then rename each state with its description and color. **Always include `--color`** — omitting it leaves the Linear default grays, which look wrong for the botanical names:
 
 ```bash
-linctl team state update <STATE_ID> --name "Seeds" --description "Raw ideas — dormant, waiting to germinate"
-linctl team state update <STATE_ID> --name "Soil" --description "Real work, planted, waiting for its season"
-linctl team state update <STATE_ID> --name "Ready" --description "Ready to pick up"
-linctl team state update <STATE_ID> --name "Growing" --description "The work is alive"
-linctl team state update <STATE_ID> --name "Ripening" --description "Fruit's on the vine, seeing if it's ready"
-linctl team state update <STATE_ID> --name "Harvested" --description "You grew it, you picked it, it's done"
-linctl team state update <STATE_ID> --name "Composted" --description "Went back to the earth — fertilizer, not failure"
+linctl team state update <STATE_ID> --name "Seeds" --color "#8B5CF6" --description "Raw ideas — dormant, waiting to germinate"
+linctl team state update <STATE_ID> --name "Soil" --color "#A78BFA" --description "Real work, planted, waiting for its season"
+linctl team state update <STATE_ID> --name "Ready" --color "#60A5FA" --description "Ready to pick up"
+linctl team state update <STATE_ID> --name "Growing" --color "#34D399" --description "The work is alive"
+linctl team state update <STATE_ID> --name "Ripening" --color "#FBBF24" --description "Fruit's on the vine, seeing if it's ready"
+linctl team state update <STATE_ID> --name "Harvested" --color "#F97316" --description "You grew it, you picked it, it's done"
+linctl team state update <STATE_ID> --name "Composted" --color "#78716C" --description "Went back to the earth — fertilizer, not failure"
 ```
 
 See `plugins/linear/LINCTL_REFERENCE.md` for exact command syntax and gotchas.
@@ -180,7 +199,7 @@ Summarize what was set up:
 >
 > To add a new product label later:
 > ```
-> linctl label create --team <KEY> --name "new-repo" --group "Product" --color "#hex"
+> linctl label create --team <KEY> --name "new-repo" --parent "Product" --color "#hex"
 > ```
 
 ## Escape hatch: promoting to a Team
