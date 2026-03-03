@@ -1,0 +1,82 @@
+[
+  {
+    "query": "I have this braindump I want to explore from every angle",
+    "should_trigger": true
+  },
+  {
+    "query": "idea girlie this for me",
+    "should_trigger": true
+  },
+  {
+    "query": "spin up some divergent researchers on this concept",
+    "should_trigger": true
+  },
+  {
+    "query": "I need divergent thinking on this idea",
+    "should_trigger": true
+  },
+  {
+    "query": "give me wild ideas about how to build this",
+    "should_trigger": true
+  },
+  {
+    "query": "explore the possibility space for this PRD",
+    "should_trigger": true
+  },
+  {
+    "query": "brainstorm this from different angles",
+    "should_trigger": true
+  },
+  {
+    "query": "what are the options here? research this for me",
+    "should_trigger": true
+  },
+  {
+    "query": "can you spin up parallel researchers with different visions for this?",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to see the full spectrum of approaches before I commit",
+    "should_trigger": true
+  },
+  {
+    "query": "take this seed and explore it — I want conservative and wild takes",
+    "should_trigger": true
+  },
+  {
+    "query": "research this from radically different perspectives",
+    "should_trigger": true
+  },
+  {
+    "query": "create a new issue in Linear for this bug",
+    "should_trigger": false
+  },
+  {
+    "query": "what's the best React form library?",
+    "should_trigger": false
+  },
+  {
+    "query": "fix the typo in the README",
+    "should_trigger": false
+  },
+  {
+    "query": "what did I ship this week?",
+    "should_trigger": false
+  },
+  {
+    "query": "set up my Linear workspace",
+    "should_trigger": false
+  },
+  {
+    "query": "explain how this function works",
+    "should_trigger": false
+  },
+  {
+    "query": "we should build a tool that converts voice memos to commits",
+    "should_trigger": false
+  },
+  {
+    "query": "commit these changes",
+    "should_trigger": false
+  }
+]
