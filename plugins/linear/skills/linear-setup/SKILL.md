@@ -141,13 +141,13 @@ The magpie-recommended statuses:
 
 | Category | Default | Recommended | Color | Description |
 |---|---|---|---|---|
-| Backlog | *(create in UI)* | **Seeds** | `#8B5CF6` (violet) | Raw ideas — dormant, waiting to germinate |
-| Backlog | Backlog | **Soil** | `#A78BFA` (soft violet) | Real work, planted, waiting for its season |
-| Unstarted | Todo | **Ready** | `#60A5FA` (sky) | Ready to pick up |
-| Started | In Progress | **Growing** | `#34D399` (emerald) | The work is alive |
-| Started | In Review | **Ripening** | `#FBBF24` (amber) | Fruit's on the vine, seeing if it's ready |
-| Completed | Done | **Harvested** | `#F97316` (orange) | You grew it, you picked it, it's done |
-| Cancelled | Cancelled | **Composted** | `#78716C` (stone) | Went back to the earth — fertilizer, not failure |
+| Backlog | *(create in UI)* | **Seeds** | `#E8E5DF` (beige) | Raw ideas — dormant, waiting to germinate |
+| Backlog | Backlog | **Soil** | `#5C5C5C` (dark gray) | Real work, planted, waiting for its season |
+| Unstarted | Todo | **Ready** | `#C49A3C` (gold) | Ready to pick up |
+| Started | In Progress | **Growing** | `#8B9E7E` (sage) | The work is alive |
+| Started | In Review | **Ripening** | `#9B8EA8` (mauve) | Fruit's on the vine, seeing if it's ready |
+| Completed | Done | **Harvested** | `#C2714F` (terra cotta) | You grew it, you picked it, it's done |
+| Cancelled | Cancelled | **Composted** | `#6B3A2A` (dark brown) | Went back to the earth — fertilizer, not failure |
 | Cancelled | Duplicate | **Duplicate** | — | Keep as-is |
 
 **Important:** A default Linear team only has ONE backlog state (Backlog). The Seeds state must be created manually in the Linear UI first — `linctl` can only rename existing states, not create new ones.
@@ -170,13 +170,13 @@ linctl team state list <TEAM_KEY> --json
 Then rename each state with its description and color. **Always include `--color`** — omitting it leaves the Linear default grays, which look wrong for the botanical names:
 
 ```bash
-linctl team state update <STATE_ID> --name "Seeds" --color "#8B5CF6" --description "Raw ideas — dormant, waiting to germinate"
-linctl team state update <STATE_ID> --name "Soil" --color "#A78BFA" --description "Real work, planted, waiting for its season"
-linctl team state update <STATE_ID> --name "Ready" --color "#60A5FA" --description "Ready to pick up"
-linctl team state update <STATE_ID> --name "Growing" --color "#34D399" --description "The work is alive"
-linctl team state update <STATE_ID> --name "Ripening" --color "#FBBF24" --description "Fruit's on the vine, seeing if it's ready"
-linctl team state update <STATE_ID> --name "Harvested" --color "#F97316" --description "You grew it, you picked it, it's done"
-linctl team state update <STATE_ID> --name "Composted" --color "#78716C" --description "Went back to the earth — fertilizer, not failure"
+linctl team state update <STATE_ID> --name "Seeds" --color "#E8E5DF" --description "Raw ideas — dormant, waiting to germinate"
+linctl team state update <STATE_ID> --name "Soil" --color "#5C5C5C" --description "Real work, planted, waiting for its season"
+linctl team state update <STATE_ID> --name "Ready" --color "#C49A3C" --description "Ready to pick up"
+linctl team state update <STATE_ID> --name "Growing" --color "#8B9E7E" --description "The work is alive"
+linctl team state update <STATE_ID> --name "Ripening" --color "#9B8EA8" --description "Fruit's on the vine, seeing if it's ready"
+linctl team state update <STATE_ID> --name "Harvested" --color "#C2714F" --description "You grew it, you picked it, it's done"
+linctl team state update <STATE_ID> --name "Composted" --color "#6B3A2A" --description "Went back to the earth — fertilizer, not failure"
 ```
 
 See `plugins/linear/LINCTL_REFERENCE.md` for exact command syntax and gotchas.
