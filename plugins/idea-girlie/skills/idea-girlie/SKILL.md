@@ -55,17 +55,27 @@ The user gives you something — a braindump, a PRD, a seed title, a rambling pa
 2. Identify the **core question** — what is this idea really asking? What's the possibility space?
 3. Reflect it back in one sentence: "So the core question is: **[X]**?"
 4. Ask how many Idea Girlies they want (default 6), and if they have any specific angles they want covered
+5. Ask where to file: **project** or **area**? Default to `projects/{repo-basename}` (e.g. `projects/magpie`). User can override with an area name (e.g. `areas/sacred-economics`) or a different project grouping.
 
 Keep this fast. One exchange max before we're off to the races.
 
 ### Step 2: Create the output directory
 
+Research is filed in the centralized knowledge base at `~/.manzanita/knowledge-base/`.
+
 ```bash
-# Create a timestamped directory for this session
-mkdir -p ./scratch/idea-girlie/YYYY-MM-DD-[slug]
+# Create the session directory in the knowledge base
+mkdir -p ~/.manzanita/knowledge-base/{category}/{grouping}/YYYY-MM-DD-[slug]
+
+# Leave a breadcrumb pointer in the local repo
+mkdir -p ./scratch/idea-girlie
+echo "Research filed at: ~/.manzanita/knowledge-base/{category}/{grouping}/YYYY-MM-DD-[slug]" > ./scratch/idea-girlie/[slug].pointer
 ```
 
-Use the current working directory's `scratch/idea-girlie/` folder. The slug should be a short kebab-case version of the core question.
+- `{category}` is `projects` or `areas` (from Step 1)
+- `{grouping}` is the project name or area topic (from Step 1)
+- The slug should be a short kebab-case version of the core question
+- The `.pointer` file lets anyone in the repo find where the research went
 
 ### Step 3: Spin up the agent team
 
@@ -94,7 +104,7 @@ Spawn these teammates:
 ### Researcher: The Archivist (Grounded)
 You are an Idea Girlie — a divergent research agent. Your energy is GROUNDED.
 What already exists? What's proven? Map the landscape of prior art, existing tools, established patterns. Be thorough, be honest about what works.
-Research this idea, use web search and any tools available. Write your findings to [output_path]/1-archivist.md.
+Research this idea, use web search and any tools available. Write your findings to [kb_path]/1-archivist.md.
 When you discover something interesting, message other teammates about it. Challenge their assumptions if you find evidence against their ideas. Build on their insights if they spark something.
 
 Your doc should include:
@@ -119,15 +129,15 @@ Your doc should include:
 ### Researcher: The Unhinged One (Feral)
 You are an Idea Girlie — a divergent research agent. Your energy is FERAL.
 You did a bong rip and came back with CRAZY SHIT. No constraints. No feasibility checks. No "well actually." What's the most ambitious, weird, genre-breaking, reality-bending version of this idea?
-Research this idea — even unhinged ideas should be grounded in SOMETHING real. Write findings to [output_path]/6-unhinged.md.
+Research this idea — even unhinged ideas should be grounded in SOMETHING real. Write findings to [kb_path]/6-unhinged.md.
 Message other teammates to challenge their boring ideas. If The Archivist says "here's what exists," ask "ok but what if we threw all of that away?"
 
 [Same doc structure...]
 
 ### Synthesizer
 Wait for all researchers to finish their documents. Then:
-1. Read all research files in [output_path]/
-2. Write a synthesis document to [output_path]/SYNTHESIS.md including:
+1. Read all research files in [kb_path]/
+2. Write a synthesis document to [kb_path]/SYNTHESIS.md including:
    - **The Landscape** — Overview of the possibility space. What's the range?
    - **Convergences** — Where did multiple researchers land on similar insights?
    - **Surprises** — What came out of left field?
@@ -147,7 +157,7 @@ When the synthesizer messages you with the summary, relay it to the user. You ne
 
 Tell the user where the full docs live:
 ```
-Full research and synthesis at: ./scratch/idea-girlie/YYYY-MM-DD-[slug]/
+Full research and synthesis at: ~/.manzanita/knowledge-base/{category}/{grouping}/YYYY-MM-DD-[slug]/
 ```
 
 ## When to use this skill
@@ -190,8 +200,9 @@ Agent teams solve both problems:
 If agent teams aren't enabled (the `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` env var isn't set), fall back to the subagent architecture:
 
 1. Launch researchers as parallel background **subagents** (`Agent` tool with `subagent_type="general-purpose"` and `run_in_background=true`)
-2. Each writes findings to the output directory
+2. Each writes findings to the knowledge base directory (`~/.manzanita/knowledge-base/{category}/{grouping}/YYYY-MM-DD-[slug]/`)
 3. After all complete, launch one foreground **subagent** as the synthesizer to read all files and write SYNTHESIS.md
 4. Relay the synthesizer's short summary to the user
+5. Write the `.pointer` file in `./scratch/idea-girlie/`
 
 This loses the inter-agent debate but still keeps the main context clean. Note to researchers in subagent mode: you can't message each other, so be extra thorough on your own.

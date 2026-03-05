@@ -1,0 +1,37 @@
+[
+  {
+    "input": "have we researched CRDTs before?",
+    "expected_skill": "recall",
+    "tags": ["trigger"]
+  },
+  {
+    "input": "what do we know about sacred economics?",
+    "expected_skill": "recall",
+    "tags": ["trigger"]
+  },
+  {
+    "input": "recall financial modeling",
+    "expected_skill": "recall",
+    "tags": ["trigger"]
+  },
+  {
+    "input": "pull up that research on voice-to-linear",
+    "expected_skill": "recall",
+    "tags": ["trigger"]
+  },
+  {
+    "input": "find past idea girlie sessions about ghost",
+    "expected_skill": "recall",
+    "tags": ["trigger"]
+  },
+  {
+    "input": "I want to brainstorm a new feature",
+    "expected_skill": "idea-girlie",
+    "tags": ["negative"]
+  },
+  {
+    "input": "what's the best way to implement auth?",
+    "expected_skill": null,
+    "tags": ["negative"]
+  }
+]

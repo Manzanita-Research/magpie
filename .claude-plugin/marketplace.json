@@ -25,6 +25,12 @@
       "description": "Building-in-public updates from recent Linear activity and freeform notes. Summarize what you shipped into a casual, human post.",
       "source": "./plugins/farm-stand",
       "strict": false
+    },
+    {
+      "name": "idea-girlie",
+      "description": "Divergent research on demand. Takes any idea, braindump, or PRD and spins up parallel agents across a wildness spectrum — from grounded prior-art research to fully unhinged vision quests. Then synthesizes everything. Use /recall to search past sessions across all repos.",
+      "source": "./plugins/idea-girlie",
+      "strict": false
     }
   ]
 }
