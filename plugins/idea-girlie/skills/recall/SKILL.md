@@ -7,7 +7,7 @@ description: Search past idea-girlie research across all projects. Use when the 
 
 Search past idea-girlie research from any repo.
 
-All idea-girlie sessions are filed in `~/.manzanita/knowledge-base/` using PARA organization. This skill searches that knowledge base and surfaces what's relevant.
+All idea-girlie sessions are filed in a centralized knowledge base using PARA organization. The default path is `~/.idea-girlie/knowledge-base/` — override with the `IDEA_GIRLIE_KB` env var (Manzanita Research users: `~/.manzanita/knowledge-base/`). This skill searches that knowledge base and surfaces what's relevant.
 
 ## How it works
 
@@ -17,20 +17,25 @@ The user gives you a topic, question, or keyword. Extract the core search terms.
 
 ### Step 2: Search in two passes
 
-**Pass 1 — Directory names.** Glob the knowledge base for directory names matching the topic:
+**Pass 1 — Directory names.** Resolve the knowledge base root first:
 
 ```bash
-# Find sessions by name
-ls -R ~/.manzanita/knowledge-base/projects/ ~/.manzanita/knowledge-base/areas/ | grep -i [search-terms]
+KB="${IDEA_GIRLIE_KB:-$HOME/.idea-girlie/knowledge-base}"
 ```
 
-Use the Glob tool with patterns like `~/.manzanita/knowledge-base/**/*{term}*` to find matching session directories.
+Then glob for session directories matching the topic:
+
+```bash
+ls -R "$KB/projects/" "$KB/areas/" | grep -i [search-terms]
+```
+
+Use the Glob tool with patterns like `$KB/**/*{term}*` to find matching session directories.
 
 **Pass 2 — Synthesis content.** Search SYNTHESIS.md files for the search terms:
 
 Use the Grep tool to search for the terms across all synthesis files:
 - Pattern: the search terms
-- Path: `~/.manzanita/knowledge-base/`
+- Path: `$KB` (resolved above)
 - Glob: `**/SYNTHESIS.md`
 
 ### Step 3: Present results

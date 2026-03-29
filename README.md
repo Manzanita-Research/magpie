@@ -57,6 +57,18 @@ For repos transitioning from [GSD](https://github.com/gsd-build/get-shit-done) t
 /plugin install gsd-tools@magpie
 ```
 
+### idea-girlie
+
+Divergent research on demand. Takes any idea, braindump, or PRD and spins up parallel agents across a wildness spectrum — from grounded prior-art research to fully unhinged vision quests. Then synthesizes everything. Works without Linear. Can be installed standalone.
+
+```
+/plugin install idea-girlie@magpie
+```
+
+Use `/recall` to search past sessions across all repos.
+
+See [plugins/idea-girlie/README.md](plugins/idea-girlie/README.md) for full docs and a sample session.
+
 ## Requirements
 
 - [linctl](https://github.com/dorkitude/linctl) installed and authenticated (`linctl auth`)

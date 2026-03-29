@@ -61,15 +61,25 @@ Keep this fast. One exchange max before we're off to the races.
 
 ### Step 2: Create the output directory
 
-Research is filed in the centralized knowledge base at `~/.manzanita/knowledge-base/`.
+Research is filed in a centralized knowledge base. The default path is `~/.idea-girlie/knowledge-base/`. If you're a Manzanita Research user, use `~/.manzanita/knowledge-base/` instead — this keeps all org research in one place.
+
+You can override the default by setting `IDEA_GIRLIE_KB` in your environment:
 
 ```bash
+export IDEA_GIRLIE_KB="$HOME/my-research"
+```
+
+Create the session directory:
+
+```bash
+KB="${IDEA_GIRLIE_KB:-$HOME/.idea-girlie/knowledge-base}"
+
 # Create the session directory in the knowledge base
-mkdir -p ~/.manzanita/knowledge-base/{category}/{grouping}/YYYY-MM-DD-[slug]
+mkdir -p "$KB/{category}/{grouping}/YYYY-MM-DD-[slug]"
 
 # Leave a breadcrumb pointer in the local repo
 mkdir -p ./scratch/idea-girlie
-echo "Research filed at: ~/.manzanita/knowledge-base/{category}/{grouping}/YYYY-MM-DD-[slug]" > ./scratch/idea-girlie/[slug].pointer
+echo "Research filed at: $KB/{category}/{grouping}/YYYY-MM-DD-[slug]" > ./scratch/idea-girlie/[slug].pointer
 ```
 
 - `{category}` is `projects` or `areas` (from Step 1)
@@ -157,8 +167,9 @@ When the synthesizer messages you with the summary, relay it to the user. You ne
 
 Tell the user where the full docs live:
 ```
-Full research and synthesis at: ~/.manzanita/knowledge-base/{category}/{grouping}/YYYY-MM-DD-[slug]/
+Full research and synthesis at: $KB/{category}/{grouping}/YYYY-MM-DD-[slug]/
 ```
+(where `$KB` is `IDEA_GIRLIE_KB`, or `~/.idea-girlie/knowledge-base/` by default)
 
 ## When to use this skill
 
@@ -188,10 +199,10 @@ Agent teams solve both problems:
 ## Tips
 
 - The quality of divergent research depends on the quality of the core question. Spend a beat getting it right.
-- If the user provides a seed from Linear, pull the full context (description + comments) before spinning up the team.
+- If the user links to a ticket or issue (Linear, GitHub, Notion, etc.), pull the full context before spinning up the team.
 - The teammates should actually use their tools — web search, documentation lookups, code exploration. "Divergent" doesn't mean "making stuff up." It means "looking in unexpected places."
 - If a teammate's output is thin, message them directly to push deeper. Or ask The Unhinged One to challenge them.
-- The user might want to promote one of the pitches into a real seed, issue, or project. Offer to do that with the relevant skill (linear-seed, linear-workflow, etc.).
+- The user might want to promote one of the pitches into a real project or issue. Offer to scaffold that — create a seed issue in whatever tracker they use, draft a spec, or kick off a plan.
 - Agent teams use more tokens than subagents. Worth it for real ideation sessions. For a quick "give me 3 options," subagents or even just answering inline may be better.
 - Start with 6 teammates (the default). Scale down to 3 for lighter exploration, up to 8 for deep dives.
 
